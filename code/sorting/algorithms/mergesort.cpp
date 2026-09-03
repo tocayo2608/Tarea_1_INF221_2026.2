@@ -12,7 +12,7 @@ using namespace std;
 3. Combinar soluciones y tener una gran solución
 */
 void merge(vector<int> &arreglo, int inicio, int mitad, int final){
-    int i,j,k;
+    int k ;
     int elementosIzq = mitad-inicio +1;
     int elementosDer = final-mitad;
 
@@ -22,8 +22,8 @@ void merge(vector<int> &arreglo, int inicio, int mitad, int final){
     for (int i = 0 ; i < elementosIzq ; i++) izquierda[i] = arreglo[inicio+i];
     for (int j = 0 ; j < elementosDer ; j++) derecha[j] = arreglo[mitad +j+ 1];
 
-    i = 0;
-    j = 0;
+    int i = 0;
+    int j = 0;
     k = inicio;
 
     while( i < elementosIzq && j < elementosDer){
@@ -61,7 +61,7 @@ void mergesort(vector<int> &arreglo, int inicio, int final){
 }
 
 void imprimirArreglo(vector<int> arreglo){
-    for(int i = 0 ; i < arreglo.size(); i++){
+    for(size_t i = 0 ; i < arreglo.size(); i++){
          cout << arreglo[i] << " " ;
     }
     cout << endl; 
