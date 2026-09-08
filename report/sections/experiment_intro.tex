@@ -1,5 +1,14 @@
-\begin{mdframed}
-    \textbf{La extensión máxima para esta sección es de media página.}
-\end{mdframed}
+Los experimentos se ejecutaron en un equipo con Windows utilizando WSL2
+(Ubuntu), \texttt{g++} con las opciones \texttt{-std=c++17 -O2 -Wall -Wextra}, Python 3,
+NumPy y Matplotlib. Los programas midieron tiempo en microsegundos y memoria
+residente en KB mediante \texttt{getrusage}. Cada algoritmo recibió una copia del
+mismo input y se verificó el resultado antes de guardar la medición.
 
-Especifique el hardware y software utilizado para realizar los experimentos (por ejemplo, procesador, memoria RAM, sistema operativo, compilador y versión). Incluya una mención breve de los datasets utilizados, los cuales son los descritos en el enunciado de la tarea.
+Para sorting se utilizaron los tamaños $n\in\{10,10^3,10^5\}$ con los tres
+tipos de orden y dominios $D1,D7$, tres muestras por combinación, más una
+entrada representativa $10^7_{\text{aleatorio},D7,a}$. En total se procesaron
+55 entradas. Para matrices se utilizaron $n\in\{2^4,2^6,2^8,2^{10}\}$,
+los tipos dispersa, diagonal y densa, dominios $D0,D10$ y tres muestras,
+correspondientes a 72 pares de matrices. Los datos se generan con los
+scripts de \texttt{code/sorting/scripts/} y
+\texttt{code/matrix\_multiplication/scripts/}.

@@ -7,6 +7,10 @@
 #include <string>
 #include <vector>
 
+#ifdef __linux__
+#include <sys/resource.h>
+#endif
+
 // Implementaciones disponibles en este repositorio.
 void mergesort(std::vector<int>& arreglo, int inicio, int final);
 void quicksort(std::vector<int>& arreglo, int inicio, int final);
@@ -15,6 +19,7 @@ std::vector<int> sortArray(std::vector<int>& arreglo);
 
 struct Metrics {
 	long long time_us;
+	long memory_kb;
 };
 
 std::vector<int> readArrayFromFile(const std::filesystem::path& filepath) {
@@ -31,14 +36,29 @@ std::vector<int> readArrayFromFile(const std::filesystem::path& filepath) {
 
 template <typename Funcion>
 Metrics medirPerformance(Funcion funcion) {
+	long memory_before = 0;
+	long memory_after = 0;
+#ifdef __linux__
+	struct rusage usage_before {};
+	struct rusage usage_after {};
+	getrusage(RUSAGE_SELF, &usage_before);
+#endif
+
 	const auto inicio = std::chrono::steady_clock::now();
 	funcion();
 	const auto final = std::chrono::steady_clock::now();
 
+#ifdef __linux__
+	getrusage(RUSAGE_SELF, &usage_after);
+	memory_before = usage_before.ru_maxrss;
+	memory_after = usage_after.ru_maxrss;
+#endif
+
 	return {
 		std::chrono::duration_cast<std::chrono::microseconds>(
 			final - inicio
-		).count()
+		).count(),
+		memory_after - memory_before
 	};
 }
 
@@ -69,10 +89,13 @@ bool runAlgo(
 	}
 
 	std::ofstream measurements(measurementFile, std::ios::app);
-	measurements << entrada << ';' << medicion.time_us << '\n';
+	measurements << entrada << ';'
+				  << medicion.time_us << ';'
+				  << medicion.memory_kb << '\n';
 
 	std::cout << "  " << nombreAlgoritmo << ": "
-			  << medicion.time_us << " us\n";
+			  << medicion.time_us << " us, "
+			  << medicion.memory_kb << " KB\n";
 	return true;
 }
 

@@ -8,7 +8,12 @@ La entrega se realiza vía **aula.usm.cl** en formato `.zip`.
 
 ### Programa principal
 
+La documentación específica está en
+[`matrix_multiplication/README.md`](matrix_multiplication/README.md).
+
 ### Scripts
+
+El generador de matrices está en `matrix_multiplication/scripts/matrix_generator.py`.
 
 ## Ordenamiento de arreglo unidimensional
 

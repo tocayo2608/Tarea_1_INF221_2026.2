@@ -1,5 +1,10 @@
-\begin{mdframed}
-    \textbf{La extensión máxima para esta sección es un párrafo breve (máximo 1/4 de página).}
-\end{mdframed}
-
-Escriba una conclusión breve que interprete los resultados más importantes. Cada afirmación debe estar respaldada por los datos presentados.
+Los resultados muestran que el desempeño práctico depende tanto del tamaño como
+de la distribución de los datos. En sorting, \texttt{std::sort} fue el algoritmo más
+rápido en los tamaños pequeños y medianos, mientras que QuickSort y
+PatienceSort fueron particularmente sensibles a entradas con muchos valores
+repetidos o a ciertos órdenes iniciales. En el caso $10^7$ medido, PatienceSort
+alcanzó aproximadamente 380 segundos, frente a 0.68 segundos de \texttt{std::sort}.
+En matrices, Strassen fue más lento que Naive en las dimensiones probadas,
+aunque ambos entregaron resultados iguales; esto muestra que una mejor
+complejidad asintótica no garantiza una ventaja para tamaños donde dominan las
+constantes y la gestión de memoria.
