@@ -1,3 +1,4 @@
+import argparse
 import numpy as np
 import os
 
@@ -22,11 +23,11 @@ def guardar_arreglo(nombre_archivo, arreglo):
     with open(os.path.join("../data", "array_input", nombre_archivo), "w") as f:
         f.write(" ".join(map(str, arreglo)))
 
-def generar_archivos():
-    N = [10**1, 10**3, 10**5, 10**7] 
-    T = ["ascendente", "descendente", "aleatorio"]
-    D = ["D1", "D7"]
-    M = ["a", "b", "c"]
+def generar_archivos(tamanos=None, tipos=None, dominios=None, muestras=None):
+    N = tamanos or [10**1, 10**3, 10**5, 10**7]
+    T = tipos or ["ascendente", "descendente", "aleatorio"]
+    D = dominios or ["D1", "D7"]
+    M = muestras or ["a", "b", "c"]
     
     for n in N:
         for t in T:
@@ -38,4 +39,15 @@ def generar_archivos():
                     print(f"Generado: {nombre_archivo}")
 
 if __name__ == "__main__":
-    generar_archivos()
+    parser = argparse.ArgumentParser(description="Genera entradas para sorting")
+    parser.add_argument("--n", type=int, nargs="+", dest="tamanos")
+    parser.add_argument(
+        "--tipo",
+        choices=["ascendente", "descendente", "aleatorio"],
+        nargs="+",
+        dest="tipos"
+    )
+    parser.add_argument("--dominio", choices=["D1", "D7"], nargs="+", dest="dominios")
+    parser.add_argument("--muestras", nargs="+", dest="muestras")
+    args = parser.parse_args()
+    generar_archivos(args.tamanos, args.tipos, args.dominios, args.muestras)

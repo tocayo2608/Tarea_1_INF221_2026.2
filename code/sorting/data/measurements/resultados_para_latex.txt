@@ -1,0 +1,98 @@
+RESULTADOS EXPERIMENTALES DE SORTING
+====================================
+
+Archivo de respaldo para preparar tablas y análisis del informe LaTeX.
+Los tiempos fueron medidos por sorting.cpp y están expresados originalmente
+en microsegundos (us). Cada fila corresponde a una ejecución individual.
+
+Algoritmos:
+- MergeSort
+- QuickSort
+- PatienceSort
+- std::sort
+
+Nota: estas mediciones corresponden solo al tiempo del algoritmo. En esta
+versión del programa todavía no se registra memoria. Los resultados no son
+promedios ni medianas.
+
+
+1. n = 10, tipo aleatorio, dominio D1, muestra a
+-------------------------------------------------
+Entrada: 10_aleatorio_D1_a
+MergeSort:      1 us       (0.000001 s)
+QuickSort:      0 us       (0.000000 s)
+PatienceSort:   1 us       (0.000001 s)
+std::sort:      0 us       (0.000000 s)
+
+
+2. n = 10, tipo aleatorio, dominio D7, muestra a
+-------------------------------------------------
+Entrada: 10_aleatorio_D7_a
+MergeSort:      0 us       (0.000000 s)
+QuickSort:      0 us       (0.000000 s)
+PatienceSort:   0 us       (0.000000 s)
+std::sort:      0 us       (0.000000 s)
+
+
+3. n = 1,000, tipo aleatorio, dominio D1, muestra a
+-----------------------------------------------------
+Entrada: 1000_aleatorio_D1_a
+MergeSort:      55 us         (0.000055 s)
+QuickSort:      36 us         (0.000036 s)
+PatienceSort:   134 us        (0.000134 s)
+std::sort:      14 us         (0.000014 s)
+
+
+4. n = 100,000, tipo aleatorio, dominio D1, muestra a
+-------------------------------------------------------
+Entrada: 100000_aleatorio_D1_a
+MergeSort:      5,210 us       (0.005210 s)
+QuickSort:      231,569 us     (0.231569 s)
+PatienceSort:   1,700,071 us   (1.700071 s)
+std::sort:      1,610 us       (0.001610 s)
+
+
+5. n = 100,000, tipo aleatorio, dominio D7, muestra a
+-------------------------------------------------------
+Entrada: 100000_aleatorio_D7_a
+MergeSort:      8,301 us       (0.008301 s)
+QuickSort:      4,539 us       (0.004539 s)
+PatienceSort:   58,095 us      (0.058095 s)
+std::sort:      4,278 us       (0.004278 s)
+
+
+6. n = 10,000,000, tipo aleatorio, dominio D7, muestra a
+-----------------------------------------------------------
+Entrada: 10000000_aleatorio_D7_a
+MergeSort:      1,120,581 us       (1.120581 s)
+QuickSort:      624,138 us         (0.624138 s)
+PatienceSort:   303,937,148 us     (303.937148 s = 5.065619 min)
+std::sort:      702,162 us         (0.702162 s)
+
+
+Observaciones para el análisis
+------------------------------
+1. std::sort fue el más rápido o estuvo entre los más rápidos en los casos
+   medidos.
+2. QuickSort tuvo un rendimiento muy inferior en D1 para n=100,000, mientras
+   que mejoró considerablemente en D7. Esto es consistente con la gran
+   cantidad de valores repetidos de D1 y el uso del primer elemento como
+   pivote.
+3. PatienceSort fue especialmente lento en D1 y también tuvo un costo alto
+   en D7 para n=10,000,000. La implementación realiza búsquedas lineales
+   entre pilas y una fusión lineal sobre las pilas disponibles.
+4. MergeSort mostró un comportamiento más estable entre D1 y D7.
+5. Los casos n=10 no son adecuados para comparar rendimiento: la resolución
+   de la medición produce valores de 0 us o cercanos a 0 us.
+
+Contexto de ejecución
+---------------------
+Sistema: Linux sobre WSL (ruta /mnt/c/...)
+Compilación: g++ -std=c++17 -O2
+Entrada: archivos generados por array_generator.py
+Tipo de medición: ejecución individual por algoritmo y entrada
+
+Pendiente antes de usar estos datos como resultados finales:
+- Incorporar medición de memoria, requerida por el enunciado.
+- Repetir las mediciones y usar promedio o mediana si el informe lo requiere.
+- Generar los gráficos automáticamente desde los CSV.

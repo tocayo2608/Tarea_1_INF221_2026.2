@@ -16,6 +16,7 @@ int particion(vector<int> &array, int inicio, int final){
     for (int j = i ; j <= final ; j++){
         if (array[j] < pivote){
             swap(array[i], array[j]);
+            i++;
         }
     }
     swap(array[inicio], array[i-1]);
