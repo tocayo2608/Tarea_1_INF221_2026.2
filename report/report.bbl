@@ -16,5 +16,65 @@
   {}
 \endgroup
 
+
+\refsection{0}
+  \datalist[entry]{nty/global//global/global/global}
+    \entry{algorithms_erickson}{book}{}{}
+      \name{author}{1}{}{%
+        {{hash=5bc705fbb2f250ed1b9e6e0878e5c89f}{%
+           family={Erickson},
+           familyi={E\bibinitperiod},
+           given={Jeff},
+           giveni={J\bibinitperiod}}}%
+      }
+      \strng{namehash}{5bc705fbb2f250ed1b9e6e0878e5c89f}
+      \strng{fullhash}{5bc705fbb2f250ed1b9e6e0878e5c89f}
+      \strng{fullhashraw}{5bc705fbb2f250ed1b9e6e0878e5c89f}
+      \strng{bibnamehash}{5bc705fbb2f250ed1b9e6e0878e5c89f}
+      \strng{authorbibnamehash}{5bc705fbb2f250ed1b9e6e0878e5c89f}
+      \strng{authornamehash}{5bc705fbb2f250ed1b9e6e0878e5c89f}
+      \strng{authorfullhash}{5bc705fbb2f250ed1b9e6e0878e5c89f}
+      \strng{authorfullhashraw}{5bc705fbb2f250ed1b9e6e0878e5c89f}
+      \field{sortinit}{E}
+      \field{sortinithash}{8da8a182d344d5b9047633dfc0cc9131}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{isbn}{978-1-792-64483-2}
+      \field{month}{06}
+      \field{title}{Algorithms}
+      \field{year}{2019}
+    \endentry
+    \entry{taocv3}{book}{}{}
+      \name{author}{1}{}{%
+        {{hash=ec08e6f01da5f3814f28a70c89c64656}{%
+           family={Knuth},
+           familyi={K\bibinitperiod},
+           given={Donald\bibnamedelima E.},
+           giveni={D\bibinitperiod\bibinitdelim E\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {USA}%
+      }
+      \list{publisher}{1}{%
+        {Addison Wesley Longman Publishing Co., Inc.}%
+      }
+      \strng{namehash}{ec08e6f01da5f3814f28a70c89c64656}
+      \strng{fullhash}{ec08e6f01da5f3814f28a70c89c64656}
+      \strng{fullhashraw}{ec08e6f01da5f3814f28a70c89c64656}
+      \strng{bibnamehash}{ec08e6f01da5f3814f28a70c89c64656}
+      \strng{authorbibnamehash}{ec08e6f01da5f3814f28a70c89c64656}
+      \strng{authornamehash}{ec08e6f01da5f3814f28a70c89c64656}
+      \strng{authorfullhash}{ec08e6f01da5f3814f28a70c89c64656}
+      \strng{authorfullhashraw}{ec08e6f01da5f3814f28a70c89c64656}
+      \field{sortinit}{K}
+      \field{sortinithash}{c02bf6bff1c488450c352b40f5d853ab}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{isbn}{0201896850}
+      \field{title}{The art of computer programming, volume 3: (2nd ed.) sorting and searching}
+      \field{year}{1998}
+    \endentry
+  \enddatalist
+\endrefsection
 \endinput
 

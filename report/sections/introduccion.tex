@@ -1,5 +1,10 @@
-\begin{mdframed}
-    \textbf{La extensión máxima para esta sección es un párrafo breve (máximo 1/4 de página).}
-\end{mdframed}
-
-Escriba una introducción breve que presente los dos problemas estudiados (ordenamiento de arreglos unidimensionales y multiplicación de matrices cuadradas) y el objetivo del análisis experimental: relacionar el comportamiento práctico de los algoritmos con su complejidad teórica.
+El análisis de algoritmos permite estudiar cómo crece el costo de una solución
+cuando aumenta el tamaño de la entrada. En este informe se estudian dos
+problemas fundamentales: el ordenamiento de arreglos unidimensionales y la
+multiplicación de matrices cuadradas. Se comparan implementaciones de
+MergeSort, QuickSort, PatienceSort y \texttt{std::sort}, además de los métodos
+Naive y Strassen, relacionando sus tiempos de ejecución y uso de memoria con
+las complejidades teóricas descritas en la literatura
+\cite{taocv3,algorithms_erickson}. El objetivo es identificar qué tan bien las
+mediciones experimentales reflejan el comportamiento asintótico esperado y
+cómo influyen en ellas el tamaño, la estructura y la distribución de los datos.

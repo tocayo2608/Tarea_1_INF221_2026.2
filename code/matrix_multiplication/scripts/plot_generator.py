@@ -1,4 +1,5 @@
 import csv
+import math
 import re
 from collections import defaultdict
 from pathlib import Path
@@ -13,10 +14,24 @@ ALGORITHMS = {
 	"naive.csv": "Naive",
 	"strassen.csv": "Strassen",
 }
+REFERENCE_COMPLEXITIES = {
+	"Naive": {
+		"time_us": (3, "Naive O(n^3)"),
+		"memory_kb": (2, "Naive O(n^2)"),
+	},
+	"Strassen": {
+		"time_us": (math.log2(7), "Strassen O(n^log2(7))"),
+		"memory_kb": (2, "Strassen O(n^2)"),
+	},
+}
 NAME_PATTERN = re.compile(
 	r"^(?P<n>\d+)_(?P<tipo>dispersa|diagonal|densa)_"
 	r"(?P<dominio>D0|D10)_(?P<muestra>[a-z])$"
 )
+
+
+def reference_factor(size, growth):
+	return size**growth
 
 
 def read_measurements(measurement_dir):
@@ -81,6 +96,24 @@ def plot_metric(rows, output_dir, metric, ylabel, filename_prefix):
 					marker="o",
 					label=algorithm,
 				)
+				complexity = REFERENCE_COMPLEXITIES[algorithm].get(metric)
+				if complexity is not None:
+					growth, label = complexity
+					first_size = sizes[0]
+					first_value = averages[0]
+					reference_values = [
+						first_value
+						* reference_factor(size, growth)
+						/ reference_factor(first_size, growth)
+						for size in sizes
+					]
+					axis.plot(
+						sizes,
+						reference_values,
+						linestyle=":",
+						linewidth=1.8,
+						label=label,
+					)
 
 		axis.set_title(f"Multiplicación de matrices: {tipo}, {dominio}")
 		axis.set_xlabel("Dimensión de la matriz (n)")

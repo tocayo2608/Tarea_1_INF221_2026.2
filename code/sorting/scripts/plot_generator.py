@@ -1,4 +1,5 @@
 import csv
+import math
 import re
 from collections import defaultdict
 from pathlib import Path
@@ -15,10 +16,36 @@ ALGORITHMS = {
 	"patiencesort.csv": "PatienceSort",
 	"sort.csv": "std::sort",
 }
+REFERENCE_COMPLEXITIES = {
+	"MergeSort": {
+		"time_us": ("n_log_n", "MergeSort O(n log n)"),
+		"memory_kb": (1, "MergeSort O(n)"),
+	},
+	"QuickSort": {
+		"time_us": (2, "QuickSort O(n^2)"),
+		"memory_kb": (1, "QuickSort O(n)"),
+	},
+	"PatienceSort": {
+		"time_us": ("n_log_n", "PatienceSort O(n log n)"),
+		"memory_kb": (1, "PatienceSort O(n)"),
+	},
+	"std::sort": {
+		"time_us": ("n_log_n", "std::sort O(n log n)"),
+		"memory_kb": ("log_n", "std::sort O(log n)"),
+	},
+}
 NAME_PATTERN = re.compile(
 	r"^(?P<n>\d+)_(?P<tipo>ascendente|descendente|aleatorio)_"
 	r"(?P<dominio>D1|D7)_(?P<muestra>[a-z])$"
 )
+
+
+def reference_factor(size, growth):
+	if growth == "n_log_n":
+		return size * math.log2(size)
+	if growth == "log_n":
+		return math.log2(size)
+	return size**growth
 
 
 def read_measurements(measurement_dir):
@@ -83,6 +110,24 @@ def plot_metric(rows, output_dir, metric, ylabel, filename_prefix):
 					marker="o",
 					label=algorithm,
 				)
+				complexity = REFERENCE_COMPLEXITIES[algorithm].get(metric)
+				if complexity is not None:
+					growth, label = complexity
+					first_size = sizes[0]
+					first_value = averages[0]
+					reference_values = [
+						first_value
+						* reference_factor(size, growth)
+						/ reference_factor(first_size, growth)
+						for size in sizes
+					]
+					axis.plot(
+						sizes,
+						reference_values,
+						linestyle=":",
+						linewidth=1.8,
+						label=label,
+					)
 
 		axis.set_title(f"Sorting: {tipo}, {dominio}")
 		axis.set_xlabel("Tamaño del arreglo (n)")
