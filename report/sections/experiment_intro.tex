@@ -1,14 +1,40 @@
-Los experimentos se ejecutaron en un equipo con Windows utilizando WSL2
-(Ubuntu), \texttt{g++} con las opciones \texttt{-std=c++17 -O2 -Wall -Wextra}, Python 3,
-NumPy y Matplotlib. Los programas midieron tiempo en microsegundos y memoria
-residente en KB mediante \texttt{getrusage}. Cada algoritmo recibió una copia del
-mismo input y se verificó el resultado antes de guardar la medición.
+Todo se corrió en un equipo con Windows, usando WSL2 (Ubuntu), \texttt{g++}
+con las flags \texttt{-std=c++17 -O2 -Wall -Wextra}, más Python 3, NumPy y
+Matplotlib para el procesamiento y los gráficos. Los programas registran
+tiempo en microsegundos y memoria residente en KB, esto último vía
+\texttt{getrusage}. Cada algoritmo trabajó sobre una copia idéntica del input
+y su resultado se verificaba antes de guardar cualquier medición.
 
-Para sorting se utilizaron los tamaños $n\in\{10,10^3,10^5\}$ con los tres
-tipos de orden y dominios $D1,D7$, tres muestras por combinación, más una
-entrada representativa $10^7_{\text{aleatorio},D7,a}$. En total se procesaron
-55 entradas. Para matrices se utilizaron $n\in\{2^4,2^6,2^8,2^{10}\}$,
-los tipos dispersa, diagonal y densa, dominios $D0,D10$ y tres muestras,
-correspondientes a 72 pares de matrices. Los datos se generan con los
-scripts de \texttt{code/sorting/scripts/} y
-\texttt{code/matrix\_multiplication/scripts/}.
+Para el sorting se probaron los tamaños $n\in\{10,10^3,10^5\}$ combinando los
+tres tipos de orden con los dominios $D1$ y $D7$, tres muestras por
+combinación, y además el caso $n=10^7$ aleatorio, corrido completo (muestras
+$a,b,c$) en $D7$ y de forma parcial (solo muestra $a$) en $D1$. En total se
+completaron los cuatro algoritmos en 57 de las 72 entradas de sorting, más
+una entrada parcial ($10^7$, aleatorio, $D1$, muestra $a$) donde solo
+alcanzaron a medirse MergeSort y QuickSort antes de que se cerrara el plazo
+de entrega. Los 14 casos que quedaron sin correr en $n=10^7$ (dos muestras
+aleatorias en $D1$ más las doce combinaciones ascendente/descendente) se
+dejaron fuera a propósito: con pivote fijo en el primer elemento, QuickSort
+cae en $O(n^2)$ apenas la entrada está ordenada o tiene muchos valores
+repetidos, y a PatienceSort le pasa algo parecido porque recorre sus pilas de
+forma lineal --- en ambos casos el tiempo de ejecución se vuelve
+impracticable. Para las matrices se usó $n\in\{2^4,2^6,2^8,2^{10}\}$,
+cruzando los tipos dispersa, diagonal y densa con los dominios $D0$ y $D10$,
+tres muestras cada uno, lo que da 72 pares de matrices en total. Todos los
+datos se generan con los scripts que están en \texttt{code/sorting/scripts/}
+y \texttt{code/matrix\_multiplication/scripts/}.
+
+Las implementaciones de ordenamiento siguen la descripción de MergeSort y
+QuickSort que da Cormen et al.~\cite{cormen2009}, apoyada además en las
+referencias de MergeSort~\cite{wikipedia_mergesort} y
+QuickSort~\cite{wikipedia_quicksort}. PatienceSort se construyó a partir de
+la descripción del algoritmo y su vínculo con las subsecuencias crecientes
+~\cite{aldous1999patience,wikipedia_patience_sorting}. Para la multiplicación
+de matrices, la versión Naive sigue el esquema clásico de tres ciclos
+anidados de Cormen et al.~\cite{cormen2009}; la versión Strassen usa la
+reducción a siete multiplicaciones que propuso el propio
+Strassen~\cite{strassen1969}, tomando como referencia la implementación de
+Rangelak~\cite{rangelak_strassen}. Estas fuentes también quedaron anotadas al
+inicio de cada archivo correspondiente, dentro de
+\texttt{code/sorting/algorithms/} y
+\texttt{code/matrix\_multiplication/algorithms/}.

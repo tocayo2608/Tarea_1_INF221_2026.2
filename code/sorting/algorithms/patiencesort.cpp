@@ -1,3 +1,11 @@
+/*
+Fuentes consultadas para PatienceSort:
+- Aldous, D. and Diaconis, P. (1999). Longest increasing subsequences:
+    from patience sorting to the Baik-Deift-Johansson theorem.
+    https://doi.org/10.1214/ss/1009212414
+- Wikipedia contributors. "Patience sorting".
+    https://en.wikipedia.org/wiki/Patience_sorting
+*/
 
 #include <bits/stdc++.h>
 using namespace std;

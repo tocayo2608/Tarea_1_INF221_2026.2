@@ -1,10 +1,19 @@
-Los resultados muestran que el desempeño práctico depende tanto del tamaño como
-de la distribución de los datos. En sorting, \texttt{std::sort} fue el algoritmo más
-rápido en los tamaños pequeños y medianos, mientras que QuickSort y
-PatienceSort fueron particularmente sensibles a entradas con muchos valores
-repetidos o a ciertos órdenes iniciales. En el caso $10^7$ medido, PatienceSort
-alcanzó aproximadamente 380 segundos, frente a 0.68 segundos de \texttt{std::sort}.
-En matrices, Strassen fue más lento que Naive en las dimensiones probadas,
-aunque ambos entregaron resultados iguales; esto muestra que una mejor
-complejidad asintótica no garantiza una ventaja para tamaños donde dominan las
-constantes y la gestión de memoria.
+En general, el desempeño real depende tanto del tamaño de la entrada como de
+cómo están distribuidos los datos. En sorting, \texttt{std::sort} fue el más
+rápido en los tamaños chicos y medianos, mientras que QuickSort y
+PatienceSort mostraron ser particularmente vulnerables a entradas con muchos
+valores repetidos o con cierto orden inicial. El caso más contundente de todo
+el informe fue QuickSort en $n=10^7$ con dominio $D1$ (pocos valores
+distintos): al usar pivote fijo en el primer elemento, su tiempo se disparó a
+\textasciitilde50.8 minutos siguiendo casi exactamente la curva teórica
+$O(n^2)$, mientras que en $D7$ (valores mayormente únicos) el mismo algoritmo
+terminó en menos de un segundo. Es la prueba más clara de que la cota de peor
+caso no es solo un límite teórico: aparece en la práctica en cuanto la
+entrada tiene la estructura justa para gatillarla. Dentro de $D7$,
+PatienceSort fue el más costoso en $10^7$ (\textasciitilde390 segundos en
+promedio), comparado con menos de un segundo de \texttt{std::sort}. En
+cuanto a matrices, Strassen resultó más lento que Naive en todas las
+dimensiones probadas, aunque ambos entregaron resultados idénticos; esto
+deja en evidencia que tener una mejor complejidad asintótica no garantiza
+ninguna ventaja real cuando el tamaño del problema todavía deja que dominen
+las constantes y el manejo de memoria.

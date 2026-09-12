@@ -1,4 +1,4 @@
-# TAREA 1 INF221 2026-1
+# TAREA 1 INF221 2026-2
 
 ## Estructura del Repositorio
 

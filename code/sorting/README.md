@@ -103,10 +103,47 @@ Este target genera las 54 combinaciones completas con `n=10`, `1000` y
 10000000_aleatorio_D7_a.txt
 ```
 
-En total quedan 55 entradas de sorting. Esta decisión queda documentada para
-que los gráficos y resultados del informe sean reproducibles. La entrada
-grande representa el caso `D7` aleatorio, que es el caso de `n=10^7` que se
-alcanzó a ejecutar sin bloquear el resto de las mediciones.
+Las demás muestras `aleatorio` de `n=10^7` (`D7_b`, `D7_c`, `D1_a`, `D1_b`,
+`D1_c`) se generaron aparte y se midieron con un programa auxiliar,
+`sorting_missing.cpp` (ver más abajo), sin modificar `sorting.cpp` ni volver
+a correr lo ya medido. En total quedaron 57 entradas de sorting con los
+cuatro algoritmos completos, más una entrada parcial
+(`10000000_aleatorio_D1_a`, solo MergeSort y QuickSort). Esta decisión queda
+documentada para que los gráficos y resultados del informe sean
+reproducibles.
+
+### Programa auxiliar `sorting_missing.cpp`
+
+Corre los 4 algoritmos solo sobre una lista fija de archivos (los que faltan
+de `n=10^7`, tipo `aleatorio`) y agrega los resultados a los mismos CSV de
+`data/measurements/`, sin tocar `sorting.cpp`. Se usa así:
+
+```bash
+g++ -std=c++17 -O2 -Wall -Wextra \
+  sorting_missing.cpp algorithms/mergesort.cpp algorithms/quicksort.cpp \
+  algorithms/patiencesort.cpp algorithms/sort.cpp -o sorting_missing
+./sorting_missing
+```
+
+**No se generaron ni corrieron** las combinaciones `ascendente`/`descendente`
+de `n=10^7` (12 casos) ni las muestras `D1_b`/`D1_c` de `aleatorio`: con el
+pivote fijo de QuickSort y el escaneo lineal de pilas de PatienceSort, esos
+casos alcanzan complejidad práctica $O(n^2)$ y no terminan en un tiempo
+razonable (el caso `D1,a` que sí se corrió, con QuickSort, tardó ~50.8
+minutos solo para esa combinación).
+
+Para generar y medir el conjunto completo exigido por el enunciado, incluyendo
+las 18 entradas de `n=10^7`, ejecuta:
+
+```bash
+make clean-data
+make generate
+make run
+make plot
+```
+
+La ejecución completa puede requerir varios minutos u horas y varios GB de
+espacio temporal, especialmente para QuickSort y PatienceSort.
 
 Para probar una única entrada de cada tamaño, limpiando los datos anteriores:
 

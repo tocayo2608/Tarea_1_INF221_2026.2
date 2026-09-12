@@ -1,3 +1,11 @@
+/*
+Fuentes consultadas para MergeSort:
+- Cormen, T. H. et al. (2009). Introduction to Algorithms, 3rd ed.
+    https://mitpress.mit.edu/9780262033848/introduction-to-algorithms/
+- Wikipedia contributors. "Merge sort".
+    https://en.wikipedia.org/wiki/Merge_sort
+*/
+
 #include <iostream>
 #include <vector>
 
@@ -66,13 +74,3 @@ void imprimirArreglo(vector<int> arreglo){
     }
     cout << endl; 
 }
-
-
-/*
-Fuentes MergeSort
-
-https://www.youtube.com/watch?v=1Xl-Zavaci8
-https://www.youtube.com/watch?v=ACFZn_xQcz8
-https://es.wikipedia.org/wiki/Ordenamiento_por_mezcla
-
-*/

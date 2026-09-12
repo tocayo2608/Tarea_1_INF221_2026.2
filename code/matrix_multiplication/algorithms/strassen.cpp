@@ -1,3 +1,11 @@
+/*
+Fuentes consultadas para Strassen:
+- Strassen, V. (1969). Gaussian elimination is not optimal.
+    https://doi.org/10.1007/BF02165411
+- Rangelak. (s. f.). Strassen-Matrix-Multiplication, strassen.cpp.
+    https://github.com/rangelak/Strassen-Matrix-Multiplication/blob/master/strassen.cpp
+*/
+
 #include <iostream>
 
 // Crea una matriz n×n inicializada a 0
@@ -163,12 +171,3 @@ void strassen(int** A, int** B, int** C, int n) {
     deleteMatrix(C21, k);
     deleteMatrix(C22, k);
 }
-
-
-
-
-/*
-    Código modificado para Strassen puro, desde la fuente
-    Rangelak. (s.f.). Strassen-Matrix-Multiplication/strassen.cpp at master | rangelak/Strassen-Matrix-Multiplication. GitHub. 
-    https://github.com/rangelak/Strassen-Matrix-Multiplication/blob/master/strassen.cpp
-*/

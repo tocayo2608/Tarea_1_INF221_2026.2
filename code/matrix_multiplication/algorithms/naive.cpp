@@ -1,3 +1,9 @@
+/*
+Fuente consultada para la multiplicacion ingenua:
+- Cormen, T. H. et al. (2009). Introduction to Algorithms, 3rd ed.
+    https://mitpress.mit.edu/9780262033848/introduction-to-algorithms/
+*/
+
 #include <iostream>
 
 void naive(int** A, int** B, int** C, int n) {

@@ -1,3 +1,11 @@
+/*
+Fuentes consultadas para QuickSort:
+- Cormen, T. H. et al. (2009). Introduction to Algorithms, 3rd ed.
+    https://mitpress.mit.edu/9780262033848/introduction-to-algorithms/
+- Wikipedia contributors. "Quicksort".
+    https://en.wikipedia.org/wiki/Quicksort
+*/
+
 #include <iostream>
 #include <vector>
 
@@ -33,14 +41,3 @@ void quicksort(vector<int> &array , int inicio, int final){
     }
 
 }
-
-/*
-Fuentes:
-
-https://www.youtube.com/watch?v=UIBaYOUs8K8
-https://www.youtube.com/watch?v=UrPJLhKF1jY&t=239s
-https://www.youtube.com/watch?v=PupaczLYxmA IMPLEMENTACIÓN
-https://es.wikipedia.org/wiki/Quicksort
-
-
-*/
